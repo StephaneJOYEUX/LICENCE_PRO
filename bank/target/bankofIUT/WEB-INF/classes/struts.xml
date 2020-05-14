@@ -13,8 +13,7 @@
 		supplémentaires. -->
 	<constant name="struts.devMode" value="true" />
 
-	<package name="com.iut.lp" namespace="/"
-		extends="struts-default">
+	<package name="default" namespace="/" extends="struts-default">
 
 		<!-- Action générique ou dynamique -->
 		<!-- 1er paramètre indique le chemin du package -->
@@ -24,19 +23,14 @@
 		<!-- Un echec redirige vers une page comportant le nom de la class prefixée 
 			par '-error' -->
 		<!-- Toutes les combinaisons sont donc possibles -->
-		<action name="go"
-			class="com.iut.lp.controller.LoginController">
+		<action name="go" class="com.iut.lp.controller.LoginController">
 			<result name="success">JSP/go.jsp</result>
 		</action>
-
 
 		<action name="retourAccueil"
 			class="com.iut.lp.controller.LoginController">
 			<result name="success">JSP/retourAccueil.jsp</result>
 		</action>
-
-
-
 
 		<action name="*.*.*" class="com.iut.lp.{1}.{2}" method="{3}">
 			<result name="SUCCESS">/JSP/{2}.jsp</result>

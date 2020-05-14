@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CompteDto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IUT BANK</a> &gt; <a href="index.source.html" class="el_package">com.iut.lp.dto</a> &gt; <span class="el_source">CompteDto.java</span></div><h1>CompteDto.java</h1><pre class="source lang-java linenums">package com.iut.lp.dto;
+
+import static com.iut.lp.dao.BankConstants.DECOUVERT_AUTORISE;
+import static com.iut.lp.dao.BankConstants.MONTANT_DECOUVERT_AUTORISE;
+import static com.iut.lp.dao.BankConstants.NUMERO_COMPTE;
+import static com.iut.lp.dao.BankConstants.SOLDE;
+import static com.iut.lp.enumerations.ETypeCompte.getType;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.iut.lp.enumerations.ETypeCompte;
+import com.iut.lp.factory.modele.CompteFactory;
+import com.iut.lp.modele.Compte;
+
+<span class="fc" id="L19">public class CompteDto {</span>
+
+	/*
+	 * Design Pattern 'Adapter' qui transforme un resultSet en un compte -&gt; liste
+	 * comptes.
+	 */
+	public List&lt;Compte&gt; adapt(PreparedStatement requete) throws SQLException {
+<span class="fc" id="L26">		List&lt;Compte&gt; comptes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L27">		ResultSet res = requete.executeQuery();</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">		while (res.next()) {</span>
+<span class="fc" id="L29">			String numCompte = res.getString(NUMERO_COMPTE);</span>
+<span class="fc" id="L30">			Double solde = res.getDouble(SOLDE);</span>
+<span class="fc" id="L31">			Double decouvertAutorise = res.getDouble(MONTANT_DECOUVERT_AUTORISE);</span>
+<span class="fc" id="L32">			String autorisationDecouvert = res.getString(DECOUVERT_AUTORISE);</span>
+<span class="fc" id="L33">			ETypeCompte typeCompte = getType(autorisationDecouvert);</span>
+<span class="fc" id="L34">			comptes.add(CompteFactory.getCompte(typeCompte, numCompte, solde, decouvertAutorise));</span>
+<span class="fc" id="L35">		}</span>
+<span class="fc" id="L36">		return comptes;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

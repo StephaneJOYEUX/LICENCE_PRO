@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MemoireDaoCompte.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IUT BANK</a> &gt; <a href="index.source.html" class="el_package">com.iut.lp.dao.memoire</a> &gt; <span class="el_source">MemoireDaoCompte.java</span></div><h1>MemoireDaoCompte.java</h1><pre class="source lang-java linenums">package com.iut.lp.dao.memoire;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.cfg.NotYetImplementedException;
+
+import com.iut.lp.interfaces.IDaoCompte;
+import com.iut.lp.modele.Client;
+import com.iut.lp.modele.Compte;
+
+public class MemoireDaoCompte implements IDaoCompte {
+
+	private List&lt;Compte&gt; comptes;
+
+<span class="fc" id="L16">	public MemoireDaoCompte() {</span>
+<span class="fc" id="L17">		comptes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L18">		MemoireDaoClient daoClient = new MemoireDaoClient();</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">		for (Client client : daoClient.getListClient()) {</span>
+<span class="fc" id="L20">			comptes.addAll(client.getComptes());</span>
+<span class="fc" id="L21">		}</span>
+<span class="fc" id="L22">	}</span>
+
+	@Override
+	public boolean create(Compte object) {
+<span class="nc" id="L26">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public boolean update(Compte object) {
+<span class="nc" id="L31">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public Compte readById(int id) {
+<span class="nc" id="L36">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public Compte readByKey(String key) {
+<span class="nc" id="L41">		return comptes.get(0);</span>
+	}
+
+	@Override
+	public boolean delete(Compte object) {
+<span class="nc" id="L46">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public List&lt;Compte&gt; getComptes() {
+<span class="fc" id="L51">		return comptes;</span>
+	}
+
+	@Override
+	public List&lt;Compte&gt; getComptesByClient(String userId) {
+<span class="nc" id="L56">		return comptes;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

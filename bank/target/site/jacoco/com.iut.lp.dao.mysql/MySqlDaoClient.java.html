@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MySqlDaoClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">IUT BANK</a> &gt; <a href="index.source.html" class="el_package">com.iut.lp.dao.mysql</a> &gt; <span class="el_source">MySqlDaoClient.java</span></div><h1>MySqlDaoClient.java</h1><pre class="source lang-java linenums">package com.iut.lp.dao.mysql;
+
+import static com.iut.lp.dao.mysql.MySqlConnexion.getInstance;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.cfg.NotYetImplementedException;
+
+import com.iut.lp.interfaces.IDaoClient;
+import com.iut.lp.modele.Client;
+import com.iut.lp.modele.CompteSansDecouvert;
+
+public class MySqlDaoClient implements IDaoClient {
+
+	// Création d'un singleton pour éviter les instanciations multiples !
+	// Ce qu'il y a de plus couteux !
+	private static MySqlDaoClient instance;
+
+	// La connection vers la base de données :
+	private Connection connection;
+
+	// Création d'une instance de type singleton :
+	public static MySqlDaoClient getMySqlInstance() {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">		if (instance == null) {</span>
+<span class="fc" id="L30">			instance = new MySqlDaoClient();</span>
+<span class="fc" id="L31">			System.out.println(&quot;Connection à la table 'Client' établie !&quot;);</span>
+		}
+<span class="fc" id="L33">		return instance;</span>
+	}
+
+	// Constructeur privé --&gt; Donc on peut plus faire de 'new' :
+<span class="fc" id="L37">	private MySqlDaoClient() {</span>
+		try {
+<span class="fc" id="L39">			connection = getInstance();</span>
+<span class="nc" id="L40">		} catch (SQLException e) {</span>
+<span class="nc" id="L41">			System.out.println(e.getMessage());</span>
+<span class="nc" id="L42">			System.out.println(&quot;Connection à la banque est NON ok !&quot;);</span>
+<span class="fc" id="L43">		}</span>
+<span class="fc" id="L44">	}</span>
+
+	@Override
+	public boolean create(Client object) {
+<span class="nc" id="L48">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public boolean update(Client object) {
+<span class="nc" id="L53">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public Client readById(int id) {
+<span class="nc" id="L58">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public Client readByKey(String key) {
+<span class="nc" id="L63">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public boolean delete(Client object) {
+<span class="nc" id="L68">		throw new NotYetImplementedException();</span>
+	}
+
+	@Override
+	public List&lt;Client&gt; getListClient() {
+<span class="fc" id="L73">		String mySQL = &quot;SELECT * FROM utilisateur u INNER JOIN compte c ON  u.userId = c.userId&quot;;</span>
+<span class="fc" id="L74">		List&lt;Client&gt; clients = new ArrayList&lt;&gt;();</span>
+<span class="pc" id="L75">		try (PreparedStatement requete = connection.prepareStatement(mySQL)) {</span>
+<span class="pc" id="L76">			try (ResultSet res = requete.executeQuery()) {</span>
+				// Tant qu'un enregistrement existe :
+<span class="fc bfc" id="L78" title="All 2 branches covered.">				while (res.next()) {</span>
+<span class="fc" id="L79">					Client client = new Client(res.getString(&quot;userId&quot;), res.getString(&quot;nom&quot;), res.getString(&quot;adresse&quot;));</span>
+					// Il faut tester si compte avec ou sans découvert :
+<span class="fc" id="L81">					client.addCompte(new CompteSansDecouvert(res.getString(&quot;numeroCompte&quot;), res.getDouble(&quot;solde&quot;)));</span>
+<span class="fc" id="L82">					clients.add(client);</span>
+<span class="fc" id="L83">				}</span>
+<span class="pc bpc" id="L84" title="6 of 8 branches missed.">			}</span>
+<span class="pc bpc" id="L85" title="6 of 8 branches missed.">		} catch (SQLException e) {</span>
+<span class="nc" id="L86">			System.out.println(&quot;Erreur &quot; + e.getMessage());</span>
+<span class="fc" id="L87">		}</span>
+<span class="fc" id="L88">		return clients;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

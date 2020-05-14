@@ -78,9 +78,8 @@ public class MySqlDaoCompte implements IDaoCompte {
 	@Override
 	/* @return 'un compte' du client . */
 	public Compte readByKey(String key) {
-		try {
-			PreparedStatement requete = connection
-					.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE " + NUMERO_COMPTE + " = ?");
+		try (PreparedStatement requete = connection
+				.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE " + NUMERO_COMPTE + " = ?")) {
 			requete.setString(1, key);
 			return dto.adapt(requete).get(0);
 		} catch (SQLException | IndexOutOfBoundsException e) {
@@ -101,9 +100,8 @@ public class MySqlDaoCompte implements IDaoCompte {
 	@Override
 	/* @return - Les 'comptes du client' uniquement. */
 	public List<Compte> getComptesByClient(String userId) {
-		try {
-			PreparedStatement requete = connection
-					.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = ?");
+		try (PreparedStatement requete = connection
+				.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = ?")) {
 			// Initialisation du paramètre N° 1 :
 			requete.setString(1, userId);
 			return dto.adapt(requete);

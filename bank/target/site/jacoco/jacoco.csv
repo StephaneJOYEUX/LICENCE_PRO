@@ -1,0 +1,26 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+IUT BANK,com.iut.lp.modele,Banque,54,129,7,13,16,32,16,11,10,7
+IUT BANK,com.iut.lp.modele,CompteAvecDecouvert,7,37,1,3,3,9,3,4,2,3
+IUT BANK,com.iut.lp.modele,CompteSansDecouvert,0,31,1,3,0,8,1,4,0,3
+IUT BANK,com.iut.lp.modele,Client,65,32,7,1,11,11,8,4,4,4
+IUT BANK,com.iut.lp.modele,Compte,17,32,1,1,2,11,2,5,1,5
+IUT BANK,com.iut.lp.main,StartBankManager,25,0,0,0,7,0,2,0,2,0
+IUT BANK,com.iut.lp.main,StartPoint,99,0,6,0,26,0,6,0,3,0
+IUT BANK,com.iut.lp.factory.dao,MySqlDaoFactory,0,7,0,0,0,3,0,3,0,3
+IUT BANK,com.iut.lp.factory.dao,DaoFactory.new Object() {...},2,17,0,0,0,1,0,1,0,1
+IUT BANK,com.iut.lp.factory.dao,DaoFactory,6,14,2,1,2,4,2,2,0,2
+IUT BANK,com.iut.lp.factory.modele,CompteFactory,5,27,1,3,2,5,2,3,1,2
+IUT BANK,com.iut.lp.dao,BankConstants,3,0,0,0,1,0,1,0,1,0
+IUT BANK,com.iut.lp.dao.memoire,MemoireDaoClient,24,44,0,0,5,10,5,2,5,2
+IUT BANK,com.iut.lp.dao.memoire,MemoireConstants,3,0,0,0,1,0,1,0,1,0
+IUT BANK,com.iut.lp.dao.memoire,MemoireDaoCompte,25,33,0,2,6,8,6,3,6,2
+IUT BANK,com.iut.lp.controller,LoginController,18,0,0,0,7,0,4,0,4,0
+IUT BANK,com.iut.lp.dao.mysql,MySqlConnexion,3,17,0,2,2,6,1,4,1,3
+IUT BANK,com.iut.lp.dao.mysql,MySqlDaoClient,100,87,12,8,9,21,13,5,5,3
+IUT BANK,com.iut.lp.dao.mysql,MySqlDaoCompte,106,80,12,6,14,16,13,5,5,4
+IUT BANK,com.iut.lp.facade,BankManager,38,77,8,10,8,19,9,6,1,5
+IUT BANK,com.iut.lp.dto,CompteDto,0,45,0,2,0,12,0,3,0,2
+IUT BANK,com.iut.lp.exceptions,BankBusinessException,53,0,0,0,8,0,2,0,2,0
+IUT BANK,com.iut.lp.exceptions,BankTechnicalException,26,27,0,0,4,4,1,1,1,1
+IUT BANK,com.iut.lp.enumerations,EPersistance,5,33,0,0,0,2,1,3,1,3
+IUT BANK,com.iut.lp.enumerations,ETypeCompte,12,51,0,2,1,10,3,5,3,4
