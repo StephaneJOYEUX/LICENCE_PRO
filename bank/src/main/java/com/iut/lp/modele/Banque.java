@@ -72,7 +72,7 @@ public class Banque {
 	/* Méthode de retrait -> courte et simple à comprendre */
 	public boolean retrait(String numCompte, String numClient, Double montant) {
 		Compte compte = getManager().getCompteByCompteNumberAndClientNumber(numClient, numCompte);
-		if (compte != null) {
+		if (compte == null) {
 			if (compte.debiter(montant)) {
 				// Persistance en db ! - Ecrire dans la db ..
 				//return manager.persisterCompte(compte);
