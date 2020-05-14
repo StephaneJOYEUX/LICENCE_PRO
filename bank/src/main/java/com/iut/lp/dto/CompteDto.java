@@ -24,14 +24,15 @@ public class CompteDto {
 	 */
 	public List<Compte> adapt(PreparedStatement requete) throws SQLException {
 		List<Compte> comptes = new ArrayList<>();
-		ResultSet res = requete.executeQuery();
-		while (res.next()) {
-			String numCompte = res.getString(NUMERO_COMPTE);
-			Double solde = res.getDouble(SOLDE);
-			Double decouvertAutorise = res.getDouble(MONTANT_DECOUVERT_AUTORISE);
-			String autorisationDecouvert = res.getString(DECOUVERT_AUTORISE);
-			ETypeCompte typeCompte = getType(autorisationDecouvert);
-			comptes.add(CompteFactory.getCompte(typeCompte, numCompte, solde, decouvertAutorise));
+		try (ResultSet res = requete.executeQuery()) {
+			while (res.next()) {
+				String numCompte = res.getString(NUMERO_COMPTE);
+				Double solde = res.getDouble(SOLDE);
+				Double decouvertAutorise = res.getDouble(MONTANT_DECOUVERT_AUTORISE);
+				String autorisationDecouvert = res.getString(DECOUVERT_AUTORISE);
+				ETypeCompte typeCompte = getType(autorisationDecouvert);
+				comptes.add(CompteFactory.getCompte(typeCompte, numCompte, solde, decouvertAutorise));
+			}
 		}
 		return comptes;
 	}
