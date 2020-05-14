@@ -1,7 +1,0 @@
-com\iut\lp\modele\TestCompteAvecDecouvert.class
-com\iut\lp\dao\TestMySqlDaoCompte.class
-com\iut\lp\modele\TestBanqueAvecMockito.class
-com\iut\lp\dao\TestMySqlConnexion.class
-com\iut\lp\dao\TestMySqlDaoClient.class
-com\iut\lp\modele\TestCompteSansDecouvert.class
-com\iut\lp\modele\TestBanque.class
