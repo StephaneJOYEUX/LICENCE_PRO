@@ -13,7 +13,7 @@
 		supplémentaires. -->
 	<constant name="struts.devMode" value="true" />
 
-	<package name="default" namespace="/" extends="struts-default">
+	<package name="default" extends="struts-default">
 
 		<!-- Action générique ou dynamique -->
 		<!-- 1er paramètre indique le chemin du package -->
