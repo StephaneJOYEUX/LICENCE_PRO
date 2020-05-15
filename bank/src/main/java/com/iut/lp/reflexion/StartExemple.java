@@ -24,16 +24,19 @@ public class StartExemple {
 		 * c'est-à-dire de charger une classe, d'en créer une instance et d'accéder aux
 		 * membres statiques ou non (appel de méthodes, lire et écrire les attributs)
 		 * sans connaître la classe par avance.
-		 */		
+		 * https://fr.wikibooks.org/wiki/Programmation_Java/R%C3%A9flexion
+		 */
 
 		logger.info("-------> Par usage factory -");
 		Compte c = CompteFactory.getCompte(SANS_DECOUVERT, NUMERO_COMPTE, 300d);
 		logger.info("Solde du compte : " + c.getSolde());
 
-		logger.info("-------> Par réflexion");
+		logger.info("-------> Par réflexion - utilisation généricité Objets - ");
 		Class<?> cf = Class.forName("com.iut.lp.factory.modele.CompteFactory");
 		Method methode = cf.getMethod("getCompte", ETypeCompte.class, String.class, Double.class);
 		Object o = methode.invoke(cf.newInstance(), SANS_DECOUVERT, NUMERO_COMPTE, 500d);
-		logger.info(((Compte) o).getSolde());
+		if (o instanceof Compte) {
+			logger.info(((Compte) o).getSolde());
+		}
 	}
 }
