@@ -4,11 +4,14 @@ import static com.iut.lp.dao.memoire.MemoireConstants.NOM_BANK_TEST;
 import static com.iut.lp.dao.memoire.MemoireConstants.NUMERO_BANK_TEST;
 import static com.iut.lp.dao.memoire.MemoireConstants.NUMERO_REF_BANK_TEST;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.iut.lp.exceptions.BankBusinessException;
 import com.iut.lp.modele.Banque;
 import com.iut.lp.modele.Client;
+import com.iut.lp.modele.Compte;
 import com.opensymphony.xwork2.ActionSupport;
 
 /***
@@ -28,6 +31,16 @@ public class LoginController extends ActionSupport {
 	private String userPwd;
 
 	private String message;
+
+	private List<Compte> comptes;
+
+	public List<Compte> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(List<Compte> comptes) {
+		this.comptes = comptes;
+	}
 
 	// Le contrôleur est connecté au modèle :
 	private Banque banque;
@@ -66,6 +79,10 @@ public class LoginController extends ActionSupport {
 		logger.info("Tentative de connection : " + this.getUserCde() + " / " + this.getUserPwd());
 		try {
 			Client client = banque.getLoginClient(getUserCde(), getUserPwd());
+			comptes = banque.getComptesClient(client);
+			for (Compte compte : comptes) {
+				logger.info(compte.toString());
+			}
 			logger.info(client.toString());
 			setMessage("Le client est reconnu et identification ok");
 			return ActionSupport.SUCCESS;

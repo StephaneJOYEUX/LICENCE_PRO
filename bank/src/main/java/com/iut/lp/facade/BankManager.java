@@ -93,4 +93,8 @@ public class BankManager {
 		// Mettre à jour l'objet compte :
 		return dao.getDaoCompte().update(compte);
 	}
+
+	public List<Compte> getComptes(String numeroClient) {
+		return dao.getDaoCompte().getComptesByClient(numeroClient);
+	}
 }

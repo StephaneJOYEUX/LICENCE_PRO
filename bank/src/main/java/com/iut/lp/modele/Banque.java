@@ -57,6 +57,11 @@ public class Banque {
 		return comptes.add(compte);
 	}
 
+	public List<Compte> getComptesClient(Client client) {
+		return manager.getComptes(client.getNumeroClient());
+	}
+
+	/* @return un compte du client. */
 	public Compte getCompteClient(String numeroClient, String numeroCompte) {
 		for (Client client : clients) {
 			if (client.getNumeroClient().equals(numeroClient)) {

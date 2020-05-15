@@ -10,5 +10,12 @@
 <body>
 	Yes we are : NOUS SOMMES BIEN CONNECTES !
 	<s:text name="message"></s:text>
+	<br> Voici les comptes du client
+	<s:iterator value="comptes">
+		<br>
+		<s:text name="numCompte"></s:text>
+		<s:text name="solde"></s:text>
+		<br>
+	</s:iterator>
 </body>
 </html>
