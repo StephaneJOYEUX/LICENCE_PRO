@@ -77,6 +77,18 @@ public class BankManager {
 				"- Compte ou client inexistant !");
 	}
 
+	/* @return un client s'il existe et si son mot de passe est correct. */
+	public Client getLogin(String userId, String password) throws BankBusinessException {
+		Client client = dao.getDaoClient().readByKey(userId);
+		if (client == null) {
+			throw new BankBusinessException("getLogin()", " - L'utilisateur n'existe pas");
+		}
+		if (client.getPassword().equals(password)) {
+			return client;
+		}
+		throw new BankBusinessException("getLogin()", " - Le mot de passe est incorrect !");
+	}
+
 	public boolean persisterCompte(Compte compte) {
 		// Mettre à jour l'objet compte :
 		return dao.getDaoCompte().update(compte);

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.cfg.NotYetImplementedException;
 
+import com.iut.lp.exceptions.BankBusinessException;
 import com.iut.lp.facade.BankManager;
 
 public class Banque {
@@ -116,7 +117,13 @@ public class Banque {
 		this.manager = manager;
 	}
 
-	/* Simulation de la persistance en db */
+	public Client getLoginClient(String userId, String password) throws BankBusinessException {
+		// La banque passe par la facade -> Pour avoir l'information :
+		// Toute la logique de connection - verification est complétement encapsulée !
+		return manager.getLogin(userId, password);
+	}
+
+	/* Simulation de la persistance en db -> BEURK et REBEURK */
 	private boolean persistCompte(Compte compte) {
 		for (Iterator<Client> iterator = clients.iterator(); iterator.hasNext();) {
 			update(compte, iterator.next().getComptes());
@@ -130,9 +137,9 @@ public class Banque {
 			for (Iterator<Compte> iterCompte = comptes.iterator(); iterCompte.hasNext();) {
 				Compte compte = iterCompte.next();
 				if (compte.getNumCompte().equals(compteToUpdate.getNumCompte())) {
-					compte.setSolde(compteToUpdate.getSolde());				
+					compte.setSolde(compteToUpdate.getSolde());
 				}
-			}			
-		}		
+			}
+		}
 	}
 }

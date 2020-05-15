@@ -8,8 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Yes we are : WEEK-END MERITE et DELIVRE - LIBERE le 11 mai en principe --- ou pas :)
+	Yes we are : NOUS SOMMES BIEN CONNECTES !
 	<s:text name="message"></s:text>
-
 </body>
 </html>

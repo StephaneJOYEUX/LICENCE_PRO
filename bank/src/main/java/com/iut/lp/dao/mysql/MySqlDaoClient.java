@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.cfg.NotYetImplementedException;
 
+import com.iut.lp.exceptions.BankTechnicalException;
 import com.iut.lp.interfaces.IDaoClient;
 import com.iut.lp.modele.Client;
 import com.iut.lp.modele.CompteSansDecouvert;
@@ -40,7 +41,7 @@ public class MySqlDaoClient implements IDaoClient {
 	private MySqlDaoClient() {
 		try {
 			connection = getInstance();
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			logger.info(e.getMessage());
 			logger.info("Connection à la banque est NON ok !");
 		}
@@ -63,7 +64,21 @@ public class MySqlDaoClient implements IDaoClient {
 
 	@Override
 	public Client readByKey(String key) {
-		throw new NotYetImplementedException();
+		String mySQL = "SELECT * FROM utilisateur WHERE userId = ? ";
+		try (PreparedStatement requete = connection.prepareStatement(mySQL)) {
+			requete.setString(1, key);
+			try (ResultSet res = requete.executeQuery()) {
+				// Tant qu'un enregistrement existe :
+				while (res.next()) {
+					Client client = new Client(res.getString("userId"), res.getString("nom"), res.getString("adresse"));
+					client.setPassword(res.getString("userPwd"));
+					return client;
+				}
+			}
+		} catch (SQLException | IndexOutOfBoundsException e) {
+			throw new BankTechnicalException("readByKey()", e);
+		}
+		return null;
 	}
 
 	@Override

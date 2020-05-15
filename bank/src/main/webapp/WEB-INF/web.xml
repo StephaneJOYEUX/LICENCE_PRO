@@ -8,6 +8,7 @@
 		<welcome-file>/JSP/index.jsp</welcome-file>
 	</welcome-file-list>
 
+	<!-- Utilisation du frameworks MVC Struts  -->
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>

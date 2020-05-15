@@ -1,7 +1,14 @@
 package com.iut.lp.controller;
 
+import static com.iut.lp.dao.memoire.MemoireConstants.NOM_BANK_TEST;
+import static com.iut.lp.dao.memoire.MemoireConstants.NUMERO_BANK_TEST;
+import static com.iut.lp.dao.memoire.MemoireConstants.NUMERO_REF_BANK_TEST;
+
 import org.apache.log4j.Logger;
 
+import com.iut.lp.exceptions.BankBusinessException;
+import com.iut.lp.modele.Banque;
+import com.iut.lp.modele.Client;
 import com.opensymphony.xwork2.ActionSupport;
 
 /***
@@ -17,10 +24,19 @@ public class LoginController extends ActionSupport {
 	private Logger logger = Logger.getLogger(LoginController.class);
 
 	private String userCde;
-	
+
 	private String userPwd;
 
 	private String message;
+
+	// Le contrôleur est connecté au modèle :
+	private Banque banque;
+
+	public LoginController() throws Exception {
+		// Il faudrait créer une factory qui renverrai la banque ..
+		// --> Beurk :)
+		banque = new Banque(NUMERO_BANK_TEST, NUMERO_REF_BANK_TEST, NOM_BANK_TEST);
+	}
 
 	public String getUserCde() {
 		return userCde;
@@ -47,8 +63,15 @@ public class LoginController extends ActionSupport {
 	}
 
 	public String connection() {
-		logger.info("Je suis connecté");
-		setMessage("ça fonctionne");
-		return ActionSupport.SUCCESS;
+		logger.info("Tentative de connection : " + this.getUserCde() + " / " + this.getUserPwd());
+		try {
+			Client client = banque.getLoginClient(getUserCde(), getUserPwd());
+			logger.info(client.toString());
+			setMessage("Le client est reconnu et identification ok");
+			return ActionSupport.SUCCESS;
+		} catch (BankBusinessException e) {
+			setMessage("Probleme sur la connection : " + e.getMessage());
+			return "ERROR";
+		}
 	}
 }
