@@ -78,6 +78,7 @@ public class LoginController extends ActionSupport {
 	public String connection() {
 		logger.info("Tentative de connection : " + this.getUserCde() + " / " + this.getUserPwd());
 		try {
+			// On pourrait tout faire dans une seule fonction !
 			Client client = banque.getLoginClient(getUserCde(), getUserPwd());
 			comptes = banque.getComptesClient(client);
 			for (Compte compte : comptes) {
