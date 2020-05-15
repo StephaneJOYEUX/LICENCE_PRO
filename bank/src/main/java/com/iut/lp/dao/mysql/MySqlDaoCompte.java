@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.cfg.NotYetImplementedException;
 
 import com.iut.lp.dto.CompteDto;
@@ -23,6 +24,8 @@ import com.iut.lp.modele.Compte;
  *
  */
 public class MySqlDaoCompte implements IDaoCompte {
+
+	private static final Logger logger = Logger.getLogger(MySqlDaoCompte.class);
 
 	private static final String TABLE_NAME = "compte";
 
@@ -40,7 +43,7 @@ public class MySqlDaoCompte implements IDaoCompte {
 	public static MySqlDaoCompte getMySqlInstance() {
 		if (instance == null) {
 			instance = new MySqlDaoCompte();
-			System.out.println("Connection à la table 'Compte' établie !");
+			logger.info("Connection à la table 'Compte' établie !");
 		}
 		return instance;
 	}

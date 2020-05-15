@@ -39,7 +39,10 @@
 
 		<mockito.version>1.10.19</mockito.version>
 
+		<!-- Pour Sonar -->
 		<jacoco.version>0.7.9</jacoco.version>
+
+		<log4jversion>1.2.17</log4jversion>
 
 	</properties>
 
@@ -83,19 +86,23 @@
 			<version>${hibernate.core.version}</version>
 		</dependency>
 
-		<!-- Pour le moment cette version / on verra pour la migration -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
 			<version>${struts2.version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>${mockito.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4jversion}</version>
 		</dependency>
 
 	</dependencies>

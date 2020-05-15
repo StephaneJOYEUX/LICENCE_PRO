@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.cfg.NotYetImplementedException;
 
 import com.iut.lp.interfaces.IDaoClient;
@@ -16,6 +17,8 @@ import com.iut.lp.modele.Client;
 import com.iut.lp.modele.CompteSansDecouvert;
 
 public class MySqlDaoClient implements IDaoClient {
+
+	private static final Logger logger = Logger.getLogger(MySqlDaoClient.class);
 
 	// Création d'un singleton pour éviter les instanciations multiples !
 	// Ce qu'il y a de plus couteux !
@@ -28,7 +31,7 @@ public class MySqlDaoClient implements IDaoClient {
 	public static MySqlDaoClient getMySqlInstance() {
 		if (instance == null) {
 			instance = new MySqlDaoClient();
-			System.out.println("Connection à la table 'Client' établie !");
+			logger.info("Connection à la table 'Client' établie !");
 		}
 		return instance;
 	}
@@ -38,8 +41,8 @@ public class MySqlDaoClient implements IDaoClient {
 		try {
 			connection = getInstance();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			System.out.println("Connection à la banque est NON ok !");
+			logger.info(e.getMessage());
+			logger.info("Connection à la banque est NON ok !");
 		}
 	}
 
@@ -83,7 +86,7 @@ public class MySqlDaoClient implements IDaoClient {
 				}
 			}
 		} catch (SQLException e) {
-			System.out.println("Erreur " + e.getMessage());
+			logger.info("Erreur " + e.getMessage());
 		}
 		return clients;
 	}
