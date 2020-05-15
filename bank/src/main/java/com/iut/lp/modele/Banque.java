@@ -75,7 +75,7 @@ public class Banque {
 		if (compte != null) {
 			if (compte.debiter(montant)) {
 				// Persistance en db ! - Ecrire dans la db ..
-				//return manager.persisterCompte(compte);
+				// return manager.persisterCompte(compte);
 				return persistCompte(compte);
 			}
 		}
@@ -85,7 +85,9 @@ public class Banque {
 	public boolean depot(String numCompte, String numClient, Double montant) {
 		Compte compte = getManager().getCompteByCompteNumberAndClientNumber(numClient, numCompte);
 		if (compte != null) {
-			return compte.crediter(montant);
+			if (compte.crediter(montant)) {
+				return persistCompte(compte);
+			}
 		}
 		return false;
 	}
@@ -115,16 +117,22 @@ public class Banque {
 	}
 
 	/* Simulation de la persistance en db */
-	private boolean persistCompte(Compte compteToUpdate) {
+	private boolean persistCompte(Compte compte) {
 		for (Iterator<Client> iterator = clients.iterator(); iterator.hasNext();) {
-			Client client = (Client) iterator.next();
-			for (Iterator<Compte> iterCompte = client.getComptes().iterator(); iterCompte.hasNext();) {
-				Compte compte = (Compte) iterCompte.next();
-				if (compte.getNumCompte().equals(compteToUpdate.getNumCompte())) {
-					compte.setSolde(compteToUpdate.getSolde());
-				}
-			}
+			update(compte, iterator.next().getComptes());
 		}
+		update(compte, comptes);
 		return true;
+	}
+
+	private void update(Compte compteToUpdate, List<Compte> comptes) {
+		if (comptes != null && !comptes.isEmpty()) {
+			for (Iterator<Compte> iterCompte = comptes.iterator(); iterCompte.hasNext();) {
+				Compte compte = iterCompte.next();
+				if (compte.getNumCompte().equals(compteToUpdate.getNumCompte())) {
+					compte.setSolde(compteToUpdate.getSolde());				
+				}
+			}			
+		}		
 	}
 }
