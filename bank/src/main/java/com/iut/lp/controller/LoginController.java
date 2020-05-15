@@ -16,7 +16,27 @@ public class LoginController extends ActionSupport {
 
 	private Logger logger = Logger.getLogger(LoginController.class);
 
+	private String userCde;
+	
+	private String userPwd;
+
 	private String message;
+
+	public String getUserCde() {
+		return userCde;
+	}
+
+	public void setUserCde(String userCde) {
+		this.userCde = userCde;
+	}
+
+	public String getUserPwd() {
+		return userPwd;
+	}
+
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
+	}
 
 	public String getMessage() {
 		return message;
