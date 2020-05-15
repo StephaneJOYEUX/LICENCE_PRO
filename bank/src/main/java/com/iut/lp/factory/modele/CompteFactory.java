@@ -26,4 +26,15 @@ public class CompteFactory {
 		}
 		return null;
 	}
+
+	/* @return - Un compte sans 'découvert autorisé'. */
+	public static Compte getCompte(String numCompte, Double solde) {
+		return new CompteSansDecouvert(numCompte, solde);
+	}
+
+	/* @return - Un compte avec 'découvert autorisé'. */
+	public static Compte getCompte(String numCompte, Double solde, Double decouvertAutorise) {
+		return new CompteAvecDecouvert(numCompte, solde, decouvertAutorise);
+	}
+
 }

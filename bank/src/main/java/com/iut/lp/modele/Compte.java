@@ -48,6 +48,9 @@ public abstract class Compte {
 
 	@Override
 	public String toString() {
-		return "Compte N° " + numCompte + " à un solde de " + solde;
+		if (decouvertAutorise()) {
+			return "Compte N° " + numCompte + " à un solde de " + solde + " avec un decouvert autorisé !";
+		}
+		return "Compte N° " + numCompte + " à un solde de " + solde + " sans découvert autorisé !";
 	}
 }
